@@ -17,7 +17,6 @@ export class UploadController {
   async uploadFile(@UploadedFile() file, @Body() body: { md5: string }) {
     file.path = file.path.replace(/\\/g, '/')
 
-    console.log(file, body.md5)
     const fileType = getFileType(file.mimetype)
     const payload: CreateMaterialDto = {
       position: file.path as string,

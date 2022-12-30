@@ -25,11 +25,14 @@ export class GuideEquip {
   @Column('boolean', { comment: '设备是否被删除', default: false })
   isDelete: boolean;
 
-  @Column('varchar', { default: 0 })
+  @Column('int', { default: 0 })
   parentId: number
 
   @Column('varchar', { comment: '背景图', nullable: true })
   bgImg: string;
+
+  @Column('int', { comment: '排序号', default: 0 })
+  sortNum: number;
 
   @CreateDateColumn()
   createTime: Date;
