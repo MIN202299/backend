@@ -6,7 +6,7 @@ export class GuideButton {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('number', { nullable: false, comment: '设备id' })
+  @Column('int', { nullable: false, comment: '设备id' })
   guideEquipId: number;
 
   @Column('varchar', { nullable: false, comment: '按钮名称' })
