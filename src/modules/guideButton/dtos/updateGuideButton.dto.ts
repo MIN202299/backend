@@ -1,7 +1,11 @@
 import { IsNumber, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class CreateGuideButtonDto {
+export class UpdateGuideButtonDto {
+
+  @IsNumber()
+  @Type(() => Number)
+  id: number;
 
   @IsString()
   buttonName: string;
