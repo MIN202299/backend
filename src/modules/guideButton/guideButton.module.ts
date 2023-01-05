@@ -9,7 +9,8 @@ import { GuideButtonController } from './guideButton.controller';
       TypeOrmModule.forFeature([GuideButton])
     ],
     providers: [GuideButtonService],
-    controllers: [GuideButtonController]
+    controllers: [GuideButtonController],
+    exports: [GuideButtonService]
   }
 )
 export class GuideButtonModule {}

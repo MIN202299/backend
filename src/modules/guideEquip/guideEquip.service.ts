@@ -4,13 +4,15 @@ import { Repository } from 'typeorm';
 import { GuideEquip } from '../../entities/guideEquip.entity';
 import { createGuideEquipDto } from './dtos/createGuideEquip.dto';
 import { UpdateTreeDto } from './dtos/updateTree.dto';
+import { GuideButtonService } from '../guideButton/guideButton.service';
 
 @Injectable()
 export class GuideEquipService {
 
   constructor(
     @InjectRepository(GuideEquip)
-    private readonly guideEquipRepository: Repository<GuideEquip>
+    private readonly guideEquipRepository: Repository<GuideEquip>,
+    private readonly guideButtonService: GuideButtonService
   ) {}
 
   async create(payload: createGuideEquipDto): Promise<GuideEquip> {
@@ -76,5 +78,22 @@ export class GuideEquipService {
       bgImg: payload.bgImg
     })
 
+  }
+
+  async findByEquipId(equipId: string) {
+    const equip = await this.guideEquipRepository.findOne({
+      where: { equipmentId: equipId }
+    })
+
+    if (!equip) {
+      throw new BadRequestException('设备不存在')
+    }
+
+    const buttons = await this.guideButtonService.findAll(equip.id)
+
+    return {
+      equip,
+      buttons
+    }
   }
 }

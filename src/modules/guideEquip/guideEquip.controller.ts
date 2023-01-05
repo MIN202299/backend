@@ -36,4 +36,9 @@ export class GuideEquipController {
   async update(@Query() { id }: { id: number }, @Body() body: createGuideEquipDto) {
     return this.guideEquipService.update(id, body)
   }
+
+  @Get('getDetail/:id')
+  async findByEquipEd(@Param('id') id: string) {
+    return this.guideEquipService.findByEquipId(id)
+  }
 }

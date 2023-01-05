@@ -65,4 +65,10 @@ export class GuideButtonService {
       isOpen: payload.isOpen
     })
   }
+
+  async findAll(id: number): Promise<GuideButton[]> {
+    return await this.guideButtonRepository.find({
+      where: { guideEquipId: id, isOpen: true, isDelete: false }
+    })
+  }
 }
