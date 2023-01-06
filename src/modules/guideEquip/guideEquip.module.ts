@@ -4,6 +4,7 @@ import { GuideEquip } from 'src/entities/guideEquip.entity';
 import { GuideEquipService } from './guideEquip.service';
 import { GuideEquipController } from './guideEquip.controller';
 import { GuideButtonModule } from '../guideButton/guideButton.module';
+import { SocketGateway } from '../../socket/socket.gateway';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { GuideButtonModule } from '../guideButton/guideButton.module';
     GuideButtonModule
 
   ],
-  providers: [GuideEquipService],
+  providers: [GuideEquipService, SocketGateway],
   controllers: [GuideEquipController]
 })
 export class GuideEquipModule {}

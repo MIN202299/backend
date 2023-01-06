@@ -34,6 +34,12 @@ export class GuideEquip {
   @Column('int', { comment: '排序号', default: 0 })
   sortNum: number;
 
+  @Column('boolean', { comment: '是否循环', nullable: true })
+  isLoop: boolean
+
+  @Column('int', { comment: '循环间隔', nullable: true })
+  stepTime: number;
+
   @CreateDateColumn()
   createTime: Date;
 

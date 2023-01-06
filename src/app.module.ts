@@ -5,6 +5,7 @@ import { ormConfig } from './config/config.dev'
 import { GuideEquipModule } from './modules/guideEquip/guideEquip.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { GuideButtonModule } from './modules/guideButton/guideButton.module';
+import { SocketGateway } from './socket/socket.gateway';
 
 
 @Module({
@@ -21,6 +22,6 @@ import { GuideButtonModule } from './modules/guideButton/guideButton.module';
     GuideButtonModule
   ],
   controllers: [],
-  providers: [],
+  providers: [SocketGateway]
 })
 export class AppModule {}

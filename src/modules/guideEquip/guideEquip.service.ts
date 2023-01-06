@@ -5,6 +5,7 @@ import { GuideEquip } from '../../entities/guideEquip.entity';
 import { createGuideEquipDto } from './dtos/createGuideEquip.dto';
 import { UpdateTreeDto } from './dtos/updateTree.dto';
 import { GuideButtonService } from '../guideButton/guideButton.service';
+import { UpdateConfigDto } from './dtos/updateConfig.dto';
 
 @Injectable()
 export class GuideEquipService {
@@ -95,5 +96,20 @@ export class GuideEquipService {
       equip,
       buttons
     }
+  }
+
+  async updateConfig(payload: UpdateConfigDto) {
+    const equip = await this.guideEquipRepository.findOne({
+      where: { id: payload.id }
+    })
+
+    if (!equip) {
+      throw new BadRequestException('设备不存在')
+    }
+
+    equip.isLoop = payload.isLoop
+    equip.stepTime = payload.stepTime
+
+    return await this.guideEquipRepository.save(equip)
   }
 }
