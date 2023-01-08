@@ -59,4 +59,8 @@ export class GuideEquipController {
     return true
   }
 
+  @Get('checkEquip/:id')
+  async checkEquip(@Param('id') id: string) {
+    return this.guideEquipService.checkEquip(id)
+}
 }

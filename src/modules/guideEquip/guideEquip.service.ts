@@ -112,4 +112,15 @@ export class GuideEquipService {
 
     return await this.guideEquipRepository.save(equip)
   }
+
+  async checkEquip(id: string) {
+    const equip = await this.guideEquipRepository.findOne({
+      where: { equipmentId: id }
+    })
+
+    if (!equip) {
+      throw new BadRequestException('设备不存在')
+    }
+    return equip
+  }
 }
