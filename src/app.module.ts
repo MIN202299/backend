@@ -1,21 +1,24 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
-import { ormConfig } from './config/config.dev'
 import { GuideEquipModule } from './modules/guideEquip/guideEquip.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { GuideButtonModule } from './modules/guideButton/guideButton.module';
 import { SocketGateway } from './socket/socket.gateway';
+import ormConfigDev from './config/config.dev'
+import ormConfigProd from './config/config.prod'
 
+const envFile = process.env.NODE_ENV !== 'production' ? '.env' : '.env.prod'
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [ormConfig]
+      envFilePath: envFile,
+      load: [ormConfigDev, ormConfigProd]
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: ormConfig
+      useFactory: process.env.NODE_ENV !== 'production' ? ormConfigDev : ormConfigProd
     }),
     GuideEquipModule,
     UploadModule,

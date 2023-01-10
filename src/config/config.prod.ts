@@ -9,7 +9,7 @@ const ormConfig  = ():TypeOrmModuleOptions => ({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   autoLoadEntities: true,
-  synchronize: true
+  synchronize: false
 })
 
 export default registerAs('orm.config', ormConfig)
