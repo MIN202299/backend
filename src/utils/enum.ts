@@ -11,3 +11,11 @@ export enum ActionType {
   TO_NEXT = 'to_next', // 下一个
   TO_LAST = 'to_last'
 }
+
+export enum ShowRoomEquipType {
+  singe = '单机播控',
+  multiple = '多机联控'
+}
+
+console.log(Object.keys(ShowRoomEquipType))
+console.log(ShowRoomEquipType.singe)

@@ -7,6 +7,7 @@ import { GuideButtonModule } from './modules/guideButton/guideButton.module';
 import { SocketGateway } from './socket/socket.gateway';
 import ormConfigDev from './config/config.dev'
 import ormConfigProd from './config/config.prod'
+import { ShowRoomEquipModule } from './modules/showRoomEquip/showRoomEquip.module';
 
 const envFile = process.env.NODE_ENV !== 'production' ? '.env' : '.env.prod'
 
@@ -22,7 +23,8 @@ const envFile = process.env.NODE_ENV !== 'production' ? '.env' : '.env.prod'
     }),
     GuideEquipModule,
     UploadModule,
-    GuideButtonModule
+    GuideButtonModule,
+    ShowRoomEquipModule
   ],
   controllers: [],
   providers: [SocketGateway]
