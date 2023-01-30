@@ -16,6 +16,3 @@ export enum ShowRoomEquipType {
   singe = '单机播控',
   multiple = '多机联控'
 }
-
-console.log(Object.keys(ShowRoomEquipType))
-console.log(ShowRoomEquipType.singe)

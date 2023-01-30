@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ShowRoomEquipEntity } from '../../entities/showRoomEquip.entity';
 import { Repository } from 'typeorm';
 import { createEquipDto } from './dtos/createEquip.dto';
+import { UpdateSortNumDto } from './dtos/updateSortNum.dto';
 
 @Injectable()
 export class ShowRoomEquipService {
@@ -32,4 +33,46 @@ export class ShowRoomEquipService {
 
     return await this.showRoomEquipEntity.save(equipment)
   }
+
+  async getAllEquip() {
+    return await this.showRoomEquipEntity.find({
+      order: {
+        sortNum: 'ASC'
+      },
+      where: {
+        isDelete: false
+      }
+    })
+  }
+
+  async updateSort(payload: UpdateSortNumDto[]) {
+    try {
+      for (let item of payload) {
+        await this.showRoomEquipEntity.update(item.id, {
+          sortNum: item.sortNum
+        })
+      }
+    } catch (e) {
+      throw new BadRequestException('更新失败')
+    }
+    return true
+  }
+
+  async removeEquip(id: number) {
+    return this.showRoomEquipEntity.update(id, {
+      isDelete: true
+    })
+  }
+
+  async updateEquip(id: number, payload: createEquipDto) {
+    return await this.showRoomEquipEntity.update(id, {
+      equipmentName: payload.equipmentName,
+      description: payload.description,
+      width: payload.width,
+      height: payload.height,
+      subEquipSetting: payload.subEquipSetting,
+      subEquipNum: payload.subEquipNum
+    })
+  }
+
 }
