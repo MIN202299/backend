@@ -33,4 +33,9 @@ export class ShowRoomEquipController {
   async updateEquip(@Param('id') id: number, @Body() body: createEquipDto) {
     return this.showRoomEquipService.updateEquip(id, body)
   }
+
+  @Get('findEquip/:id')
+  async findEquip(@Param('id') id: number) {
+    return this.showRoomEquipService.findEquip(id)
+  }
 }

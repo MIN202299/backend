@@ -1,8 +1,8 @@
 export enum FileType {
-  IMAGE,
-  VIDEO,
-  AUDIO,
-  OTHER
+  IMAGE='image',
+  VIDEO='video',
+  AUDIO='audio',
+  OTHER='other'
 }
 
 export enum ActionType {

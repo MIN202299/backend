@@ -75,4 +75,10 @@ export class ShowRoomEquipService {
     })
   }
 
+  async findEquip(id: number) {
+    return await this.showRoomEquipEntity.findOne({
+      where: {id}
+    })
+  }
+
 }
