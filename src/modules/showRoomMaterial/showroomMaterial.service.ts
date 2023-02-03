@@ -51,10 +51,10 @@ export class ShowroomMaterialService {
 
   async updateThemeType(body: UpdateThemeTypeDto) {
     const qb = this.showroomMaterialRepo.createQueryBuilder('showroomMaterial')
-    await qb.update()
-            .set({ isOpen: false })
-            .where({showroomEquipId: body.showroomEquipId})
-            .execute();
+    // await qb.update()
+    //         .set({ isOpen: false })
+    //         .where({showroomEquipId: body.showroomEquipId})
+    //         .execute();
 
     await qb.update()
             .set({ isOpen: body.type })
@@ -89,6 +89,24 @@ export class ShowroomMaterialService {
       for (let id of materialIds) {
         materialsDetail.push(tempMap[id])
       }
+    } else {
+      const materialIdArr = JSON.parse(theme.materialIds)
+      for (let materialIds of materialIdArr) {
+        const tempDetail = await this.materialRepo.find({
+          where: {
+            id: In(materialIds)
+          }
+        })
+        const tempMap = {}
+        const tempArr = []
+        tempDetail.forEach(item =>{
+          tempMap[item.id] = item
+        })
+        for (let id of materialIds) {
+          tempArr.push(tempMap[id])
+        }
+        materialsDetail.push(tempArr)
+      }
     }
 
     return {
@@ -107,6 +125,24 @@ export class ShowroomMaterialService {
       materialNum: body.materialNum,
       raw: body.raw
     })
+  }
 
+  async removeTheme(id: number) {
+    return await this.showroomMaterialRepo.update({id}, {
+      isDelete: true
+    })
+  }
+
+  async getAll(id: number) {
+    return await this.showroomMaterialRepo.find({
+      where: {
+        showroomEquipId: id,
+        isDelete: false,
+        isOpen: true
+      },
+      order: {
+        id: 'ASC'
+      }
+    })
   }
 }

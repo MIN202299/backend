@@ -32,7 +32,7 @@ export class SocketGateway implements OnGatewayInit, OnGatewayDisconnect, OnGate
     console.log(`断开连接客户端id:${client.id}`)
   }
 
-  sendToAllClient<T>(type: ActionType, data: T) {
+  sendToAllClient<T>(type: ActionType | string, data: T) {
     this.socketServer.emit(type, data)
   }
 }

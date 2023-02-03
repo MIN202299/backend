@@ -81,4 +81,13 @@ export class ShowRoomEquipService {
     })
   }
 
+  async findEquipByEquipId(id: string) {
+    const equip = await this.showRoomEquipEntity.findOne({
+      where: {equipmentId: id}
+    })
+    if (!equip) {
+      throw new BadRequestException('设备不存在')
+    }
+    return equip
+  }
 }

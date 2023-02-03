@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ShowRoomEquipService } from './showRoomEquip.service';
 import { createEquipDto } from './dtos/createEquip.dto';
 import { UpdateSortNumDto } from './dtos/updateSortNum.dto';
@@ -38,4 +38,10 @@ export class ShowRoomEquipController {
   async findEquip(@Param('id') id: number) {
     return this.showRoomEquipService.findEquip(id)
   }
+
+  @Get('findEquipByEquipId/:id')
+  async findEquipByEquipId(@Param('id') id: string) {
+    return this.showRoomEquipService.findEquipByEquipId(id)
+  }
+
 }

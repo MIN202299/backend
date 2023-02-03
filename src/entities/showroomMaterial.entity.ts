@@ -12,7 +12,7 @@ export class ShowroomMaterialEntity {
   @Column('varchar', { nullable: false, comment: '主题名称' })
   themeName: string;
 
-  @Column('boolean', { default: false, comment: '是否开启' })
+  @Column('boolean', { default: true, comment: '是否开启' })
   isOpen: boolean
 
   @Column('text', { comment: '内容' })
